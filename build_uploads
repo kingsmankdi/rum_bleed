@@ -1,0 +1,69 @@
+#!/bin/bash
+cd /tmp/rom # Depends on where source got synced
+
+# Normal build steps
+. build/envsetup.sh
+lunch dot_juice-user
+export CCACHE_DIR=/tmp/ccache
+export CCACHE_EXEC=$(which ccache)
+export USE_CCACHE=1
+export WITH_GAPPS=true 
+export DOT_OFFICIAL=true
+ccache -M 20G 
+ccache -o compression=true 
+ccache -z
+
+#tg
+tg(){
+	bot_api=$bot_api 
+	your_telegram_id=$1 
+	msg=$2
+	curl -s "https://api.telegram.org/bot${bot_api}/sendmessage" --data "text=$msg&chat_id=${your_telegram_id}&parse_mode=html"
+}
+id=272503335 # Your telegram id
+tg $id "juice ROM Compile Status: STARTED!.
+Started at:- $(date)."
+
+make bacon -j8 &
+sleep 95m
+kill %1
+ccache -s
+
+#make bacon -j8 
+
+#uploads
+
+mkdir -p ~/.config/rclone
+echo "$rclone_config" > ~/.config/rclone/rclone.conf
+
+#up(){
+#	curl --upload-file $1 https://transfer.sh/$(basename $1); echo
+#	# 14 days, 10 GB limit
+#}
+
+#time rclone copy /tmp/rom/out/target/product/juice/dotOS*zip juice:dotOS -P
+#tg $id "juice Compile Status: \`FINISHED!\`
+#Finished at:- \`$(date)\`.
+#Download Link:https://rom.aseelpsathar-romdev.workers.dev/dotOS/
+#CCache Stats:-
+#\`$(ccache -s | sed -n -e "6,9 p" -e "9 q")\`"
+
+#ccache -s
+
+cd /tmp
+
+# Compress function with pigz for faster compression
+com () 
+{ 
+    tar --use-compress-program="pigz -k -$2 " -cf $1.tar.gz $1
+}
+
+time com ccache 1 # Compression level 1, its enough
+
+tg $id "juice _ROM Compile Status:
+ccache uploading started at:- $(date)."
+
+time rclone copy ccache.tar.gz juice:ccache -P 
+
+tg $id "juice ROM Compile Status:
+ccache uploaded at:- $(date)."
