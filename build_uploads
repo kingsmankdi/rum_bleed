@@ -24,12 +24,12 @@ id=272503335 # Your telegram id
 tg $id "juice ROM Compile Status: STARTED!.
 Started at:- $(date)."
 
-make bacon -j8 &
-sleep 95m
-kill %1
-ccache -s
+#make bacon -j8 &
+#sleep 95m
+#kill %1
+#ccache -s
 
-#make bacon -j8 
+make bacon -j8 
 
 #uploads
 
@@ -41,14 +41,14 @@ echo "$rclone_config" > ~/.config/rclone/rclone.conf
 #	# 14 days, 10 GB limit
 #}
 
-#time rclone copy /tmp/rom/out/target/product/juice/dotOS*zip juice:dotOS -P
-#tg $id "juice Compile Status: \`FINISHED!\`
-#Finished at:- \`$(date)\`.
-#Download Link:https://rom.aseelpsathar-romdev.workers.dev/dotOS/
-#CCache Stats:-
-#\`$(ccache -s | sed -n -e "6,9 p" -e "9 q")\`"
+time rclone copy /tmp/rom/out/target/product/juice/dotOS*zip juice:dotOS -P
+tg $id "juice Compile Status: \`FINISHED!\`
+Finished at:- \`$(date)\`.
+Download Link:https://rom.aseelpsathar-romdev.workers.dev/dotOS/
+CCache Stats:-
+\`$(ccache -s | sed -n -e "6,9 p" -e "9 q")\`"
 
-#ccache -s
+ccache -s
 
 cd /tmp
 
