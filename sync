@@ -18,7 +18,8 @@ tg(){
 id=272503335 
 tg $id "juice_ROM _Compile _Status: TRIGGERED!.
 Triggered _at:- $(date).
-https://cirrus-ci.com/"
+https://cirrus-ci.com/build/$CIRRUS_BUILD_ID
+https://cirrus-ci.com/task/$CIRRUS_TASK_ID"
 
 mkdir -p /tmp/rom 
 cd /tmp/rom
