@@ -2,18 +2,18 @@ env:
     CIRRUS_CLONE_DEPTH: 1
     CIRRUS_WORKING_DIR: "/tmp/ci" 
 
-    rclone_config: "ENCRYPTED[d4e9954a9648237bce9c5d4b1361ef92c58aac777d2ef784f35b1059c50637eeea21c6af165541584a61a2a990a0825f]"
+    rclone_config: "ENCRYPTED[11aa8fa104ec83c9ebe67c9c8fb5482cbc1beea99f1cb8eb9a929547f5355d70b05b38279e4c231f4fc2b524dcee737a]"
     bot_api: "ENCRYPTED[bd5ae027c64950908d28f5a7447d1529e81954325525b51674dcd3431d71c6c4b4025c69cd748eeb3852f5f49c5f69d7]"
     
 task:
-    name: juice 
+    name: vince 
     timeout_in: 120m # Otherwise it will timeout at 60m automatically, 120m highest in free account
     container:
       dockerfile: Dockerfile # It has built-in setup environment + repo, aria2, rclone, pigz, username ci, and email ci@ci.ci 
       cpu: 8 
       memory: 32G 
-    download_ccache_background_script: 
-     - ./download_ccache 
+#    download_ccache_background_script: 
+#     - ./download_ccache 
     sync_script: 
       - ./sync 
     build_uploads_script: 
