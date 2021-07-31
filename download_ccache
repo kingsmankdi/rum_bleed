@@ -6,7 +6,7 @@ nproc
 cat /etc/os*
 env
 
-url=https://rom.aseelsathar.workers.dev/ccache/ccache.tar.gz 
+url=https://ancient-bush-fa07.010-hugo-ad.workers.dev/ccache/ccache.tar.gz 
 
 cd /tmp 
 time aria2c $url -x16 -s50 

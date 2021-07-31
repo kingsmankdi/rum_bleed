@@ -1,7 +1,6 @@
 #!/bin/bash
-git config --global  user.name "aseelsathar"
-git config --global  user.email "aseelsathar@gmail.com"
-
+git config --global user.name "hugo-adword"
+git config --global user.email "00.hugo.ad@gmail.com"
 
 #tg
 tg(){
@@ -11,8 +10,8 @@ tg(){
 	curl -s "https://api.telegram.org/bot${bot_api}/sendmessage" --data "text=$msg&chat_id=${your_telegram_id}&parse_mode=html"
 }
 
-id=272503335 
-tg $id "vince_ROM _Compile _Status: TRIGGERED!.
+id=-1001273969756 
+tg $id "DerpFest _Compile _Status: TRIGGERED!.
 Triggered _at:- $(date).
 https://cirrus-ci.com/build/$CIRRUS_BUILD_ID
 https://cirrus-ci.com/task/$CIRRUS_TASK_ID"
@@ -20,16 +19,21 @@ https://cirrus-ci.com/task/$CIRRUS_TASK_ID"
 mkdir -p /tmp/rom 
 cd /tmp/rom
 
-repo init -q --no-repo-verify --depth=1 -u git://github.com/DotOS/manifest.git -b dot11 -g default,-device,-mips,-darwin,-notdefault
+repo init -q --no-repo-verify --depth=1 -u git://github.com/DerpFest-11/manifest.git -b 11 -g default,-device,-mips,-darwin,-notdefault
 
 repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j 30 || repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j 8
 
-git clone --depth=1 https://github.com/aseelps/device_xiaomi_vince-11 --single-branch -b enforcive device/xiaomi/vince
-git clone --depth=1 https://github.com/aseelps/vendor_xiaomi_vince-11 --single-branch -b dot11 vendor/xiaomi/vince
-git clone --depth=1 https://github.com/dotOS-Devices/android_kernel_xiaomi_vince  --single-branch -b dot11 kernel/xiaomi/vince
+#device
+git clone https://github.com/adnan-44/device_xiaomi_vince --single-branch -b for-me device/xiaomi/vince
+git clone https://github.com/adnan-44/vendor_xiaomi_vince --single-branch -b derp-11 vendor/xiaomi/vince --depth 1
+git clone https://github.com/Blacksuan19/kernel_dark_ages_vince.git --single-branch -b darky kernel/xiaomi/vince
+rm -rf hardware/qcom-caf/wlan && git clone https://android.googlesource.com/platform/hardware/qcom/wlan hardware/qcom-caf/wlan
 
-#hals
-rm -rf hardware/qcom-caf/msm8996/audio &&  git clone https://github.com/aseelps/hardware_qcom_audio_msm8996-vince hardware/qcom-caf/msm8996-vince/audio
-rm -rf hardware/qcom-caf/msm8996/media && git clone https://github.com/aseelps/hardware_qcom_media_msm8996-vince hardware/qcom-caf/msm8996-vince/media
-rm -rf hardware/qcom-caf/msm8996/display &&  git clone https://github.com/aseelps/hardware_qcom_display_msm8996-vince hardware/qcom-caf/msm8996-vince/display
+# Hal
+rm -rf hardware/qcom-caf/msm8996
+git clone https://gitlab.com/hugo-adword/hardware_qcom_audio.git --single-branch -b r11.0 hardware/qcom-caf/msm8996/audio
+git clone https://gitlab.com/hugo-adword/hardware_qcom_display.git --single-branch -b r11.0 hardware/qcom-caf/msm8996/display
+git clone https://gitlab.com/hugo-adword/hardware_qcom_media.git --single-branch -b r11.0 hardware/qcom-caf/msm8996/media
+
+cd kernel/xiaomi/vince && git revert fec013b9f5bb70c1e51285aa6e042f21f4298447 --no-edit && cd ../../..
 

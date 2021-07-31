@@ -1,30 +1,32 @@
 #!/bin/bash
 cd /tmp/rom # Depends on where source got synced
 
+curl https://gist.githubusercontent.com/SuperCosmicBeing/c6db35d8abfa480e183a66b71ffca563/raw/3f5f1fc6d02ae767479bda37c04ea417a229f7eb/gms_full.mk >> gms_full.mk
+mv gms_full.mk vendor/gms/
+rm -rf device/generic/opengl-transport
+
 # Normal build steps
 . build/envsetup.sh
-lunch dot_vince-user
+lunch derp_vince-user
 export CCACHE_DIR=/tmp/ccache
 export CCACHE_EXEC=$(which ccache)
 export USE_CCACHE=1
-export WITH_GAPPS=true 
-export DOT_OFFICIAL=true
 ccache -M 20G 
 ccache -o compression=true 
 ccache -z
 
-#tg
+# Telegram send message helper method
 tg(){
 	bot_api=$bot_api 
 	your_telegram_id=$1 
 	msg=$2
 	curl -s "https://api.telegram.org/bot${bot_api}/sendmessage" --data "text=$msg&chat_id=${your_telegram_id}&parse_mode=html"
 }
-id=272503335 # Your telegram id
-tg $id "vince ROM Compile Status: STARTED!.
+id=-1001273969756
+tg $id "DerpFest Compile Status: STARTED!.
 Started at:- $(date)."
 
-make bacon -j8 &
+mka derp -j8 &
 sleep 95m
 kill %1
 ccache -s
@@ -38,13 +40,12 @@ echo "$rclone_config" > ~/.config/rclone/rclone.conf
 
 #up(){
 #	curl --upload-file $1 https://transfer.sh/$(basename $1); echo
-#	# 14 days, 10 GB limit
 #}
 
-#time rclone copy /tmp/rom/out/target/product/vince/dotOS*zip vince:dotOS -P
-#tg $id "vince Compile Status: \`FINISHED!\`
+#time rclone copy /tmp/rom/out/target/product/vince/D*.zip drive:DerpFest -P
+#tg $id "DerpFest Compile Status: \`FINISHED!\`
 #Finished at:- \`$(date)\`.
-#Download Link:https://rom.aseelsathar.workers.dev/dotOS/
+#Download Link:https://ancient-bush-fa07.010-hugo-ad.workers.dev/DerpFest/
 #CCache Stats:-
 #\`$(ccache -s | sed -n -e "6,9 p" -e "9 q")\`"
 
@@ -60,10 +61,10 @@ com ()
 
 time com ccache 1 # Compression level 1, its enough
 
-tg $id "vince _ROM Compile Status:
+tg $id "DerpFest Compile Status:
 ccache uploading started at:- $(date)."
 
-time rclone copy ccache.tar.gz vince:ccache -P 
+time rclone copy ccache.tar.gz drive:ccache -P 
 
-tg $id "vince ROM Compile Status:
+tg $id "DerpFest Compile Status:
 ccache uploaded at:- $(date)."
