@@ -3,10 +3,6 @@ git config --global  user.name "aseelsathar"
 git config --global  user.email "aseelsathar@gmail.com"
 
 
-
-# Fix TimeZone
-sudo ln -snf /usr/share/zoneinfo/Asia/Kolkata /etc/localtime
-
 #tg
 tg(){
 	bot_api=$bot_api 
