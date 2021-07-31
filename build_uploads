@@ -26,12 +26,12 @@ id=-1001273969756
 tg $id "DerpFest Compile Status: STARTED!.
 Started at:- $(date)."
 
-#mka derp -j8 &
-#sleep 95m
-#kill %1
-#ccache -s
+mka derp -j8 &
+sleep 95m
+kill %1
+ccache -s
 
-mka derp -j8 
+#make bacon -j8 
 
 #uploads
 
@@ -42,14 +42,14 @@ echo "$rclone_config" > ~/.config/rclone/rclone.conf
 #	curl --upload-file $1 https://transfer.sh/$(basename $1); echo
 #}
 
-time rclone copy /tmp/rom/out/target/product/vince/D*.zip drive:DerpFest -P
-tg $id "DerpFest Compile Status: \`FINISHED!\`
-Finished at:- \`$(date)\`.
-Download Link:https://ancient-bush-fa07.010-hugo-ad.workers.dev/DerpFest/
-CCache Stats:-
-\`$(ccache -s | sed -n -e "6,9 p" -e "9 q")\`"
+#time rclone copy /tmp/rom/out/target/product/vince/D*.zip drive:DerpFest -P
+#tg $id "DerpFest Compile Status: \`FINISHED!\`
+#Finished at:- \`$(date)\`.
+#Download Link:https://ancient-bush-fa07.010-hugo-ad.workers.dev/DerpFest/
+#CCache Stats:-
+#\`$(ccache -s | sed -n -e "6,9 p" -e "9 q")\`"
 
-ccache -s
+#ccache -s
 
 cd /tmp
 
