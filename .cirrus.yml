@@ -12,8 +12,8 @@ task:
       dockerfile: Dockerfile # It has built-in setup environment + repo, aria2, rclone, pigz, username ci, and email ci@ci.ci 
       cpu: 8 
       memory: 32G 
-    download_ccache_background_script: 
-     - ./download_ccache 
+    #download_ccache_background_script: 
+     #- ./download_ccache 
     sync_script: 
       - ./sync 
     build_uploads_script: 
