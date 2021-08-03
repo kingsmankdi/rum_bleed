@@ -43,11 +43,11 @@ echo "$rclone_config" > ~/.config/rclone/rclone.conf
 #}
 
 time rclone copy /tmp/rom/out/target/product/vince/D*.zip drive:DerpFest -P
-time rclone copy /tmp/rom/out/target/product/vince/vince.json drive:DerpFest drive:DerpFest -p	# build json file
-time rclone copy /tmp/rom/out/target/product/vince/DerpFest*.sha256sum drive:DerpFest -p	# Hash file
+time rclone copy /tmp/rom/out/target/product/vince/vince.json drive:DerpFest -P	# build json file
+time rclone copy /tmp/rom/out/target/product/vince/DerpFest*.sha256sum drive:DerpFest -P	# Hash file
 tg $id "DerpFest Compile Status: \`FINISHED!\`
 Finished at:- \`$(date)\`.
-Download Link:https://ancient-bush-fa07.010-hugo-ad.workers.dev/DerpFest/
+Download Link: https://ancient-bush-fa07.010-hugo-ad.workers.dev/DerpFest/$(basename out/t*/p*/v*/D*.zip)
 CCache Stats:-
 \`$(ccache -s | sed -n -e "6,9 p" -e "9 q")\`"
 
