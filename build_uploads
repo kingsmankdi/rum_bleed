@@ -3,6 +3,40 @@ cd /tmp/rom # Depends on where source got synced
 
 curl https://gist.githubusercontent.com/SuperCosmicBeing/c6db35d8abfa480e183a66b71ffca563/raw/3f5f1fc6d02ae767479bda37c04ea417a229f7eb/gms_full.mk >> gms_full.mk
 mv gms_full.mk vendor/gms/
+
+# highly testing something
+
+curl https://gist.githubusercontent.com/hugo-adword/2d64e78f206d4155e9c414ad806d9a84/raw/e8567a652dab3c23df683e173ce487d6bf4e1f0e/Settings.java > Settings.java
+mv Settings.java frameworks/base/core/java/android/provider/
+
+rm -rf frameworks/base/packages/SystemUI/res/drawable/qs_notification_header_separator.xml
+
+curl https://gist.githubusercontent.com/hugo-adword/110b83a8bcbed3a78311ebde6f67eec5/raw/e389f5e4a192fcbf37afcb998473527fb41734e5/status_bar_notification_section_header.xml > people_strip.xml
+mv people_strip.xml frameworks/base/packages/SystemUI/res/layout/
+
+curl https://gist.githubusercontent.com/hugo-adword/a8d900d23f91f8aecde76134f47b8a1d/raw/e02ecc730b96fe1e8e968d14ac6b3752e01465eb/status_bar_expanded.xml > status_bar_expanded.xml
+mv status_bar_expanded.xml frameworks/base/packages/SystemUI/res/layout/
+
+curl https://gist.githubusercontent.com/hugo-adword/800ecef891d9884e15d5884a7cee353e/raw/387cb46414417134939ef9419e0cd98f2a6960ef/status_bar_notification_section_header.xml > status_bar_notification_section_header.xml
+mv status_bar_notification_section_header.xml frameworks/base/packages/SystemUI/res/layout/
+
+curl https://gist.githubusercontent.com/hugo-adword/9fd68e1d8abf9c434315ddda6f2c6e6b/raw/c61a0f8ab0f35a3a8974991887d217eec899d4d5/PageIndicator.java > PageIndicator.java 
+mv PageIndicator.java frameworks/base/packages/SystemUI/src/com/android/systemui/qs/
+
+curl https://gist.githubusercontent.com/hugo-adword/9ab410e89131d1c9423770cd59a756c6/raw/775f1e1bc04f40d128b1832fb995cd090c255507/PeopleHubView.kt > PeopleHubView.kt 
+mv PeopleHubView.kt frameworks/base/packages/SystemUI/src/com/android/systemui/statusbar/notification/stack/
+
+curl https://gist.githubusercontent.com/hugo-adword/08989c26d96c42ccbb55b3ce9f845839/raw/28ed96f05a6359526338f4d635668a3e3d8880be/SectionHeaderView.java > SectionHeaderView.java
+mv SectionHeaderView.java frameworks/base/packages/SystemUI/src/com/android/systemui/statusbar/notification/stack/
+
+curl https://gist.githubusercontent.com/hugo-adword/321d2646cc2b9310cf41885cd2f5f0a1/raw/c18db8325afe38f51ef29e4b0a0b89e29d811b3b/NotificationPanelViewController.java > NotificationPanelViewController.java
+mv NotificationPanelViewController.java frameworks/base/packages/SystemUI/src/com/android/systemui/statusbar/phone/
+
+curl https://gist.githubusercontent.com/hugo-adword/e90d22bc50a27c56d5e6a55227d2eaa2/raw/0d1d3332361e92180f6a6b75b976f31d67e22f05/StatusBar.java > StatusBar.java
+mv StatusBar.java frameworks/base/packages/SystemUI/src/com/android/systemui/statusbar/phone/
+
+# end of testing stuff
+
 rm -rf device/generic/opengl-transport
 
 # Normal build steps
